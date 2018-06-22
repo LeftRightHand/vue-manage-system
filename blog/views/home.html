@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ./head.html %>
+    <style type="text/css">
+        .navbar .nav > li .dropdown-menu {
+            margin: 0;
+        }
+        .navbar .nav > li:hover .dropdown-menu {
+            display: block;
+        }
+        .navbar .nav > li:hover .account {
+            background-color:#222!important;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="logo"><a href="home">Welcome to 后台管理</a></div>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <ul class="nav nav-pills">
+                    <li class="dropdown">
+                        <a class="account" href="#">admin<span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#">切换账号</a></li>
+                            <li><a href="#" class="logout">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
