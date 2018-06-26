@@ -7,17 +7,17 @@
     <div class="header-right">
       <div class="header-user">
         <!-- 全屏显示 -->
-        <div class="btn-fullscreen" @click="handleFullScreen">
-          <el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">
-            <i class="el-icon-rank"></i>
-          </el-tooltip>
-        </div>
-        <el-dropdown class="user-name">
+        <!--<div class="btn-fullscreen" @click="handleFullScreen">-->
+          <!--<el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">-->
+            <!--<i class="el-icon-rank"></i>-->
+          <!--</el-tooltip>-->
+        <!--</div>-->
+        <el-dropdown class="user-name" @command="handleCommand">
           <span class="el-dropdown-link">
             admin<i class="el-icon-caret-bottom"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -26,20 +26,20 @@
 </template>
 
 <script>
-  import bus from '../js/bus'
+    import bus from '../js/bus'
     export default {
-      methods: {
-        collapseChage() {
-          this.collapse = !this.collapse;
-          bus.$emit('collapse', this.collapse);
-        },
-        handleFullScreen() {
-
-        },
-        fullscreen() {
-
+        methods: {
+            collapseChage() {
+                this.collapse = !this.collapse;
+                bus.$emit('collapse', this.collapse);
+            },
+            handleCommand(command) {
+                if (command === 'loginout') {
+                    sessionStorage.removeItem('username')
+                    this.$router.push('/login');
+                }
+            }
         }
-      }
     }
 </script>
 

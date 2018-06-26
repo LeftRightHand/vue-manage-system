@@ -1,53 +1,59 @@
 <template>
     <div class="login-wrapper">
-      <div class="title">后台管理系统</div>
-      <div class="login">
-        <el-form class="demo-ruleForm" :model="ruleForm" ref="ruleForm" :rules="rules">
-          <el-form-item prop="username">
-            <el-input v-model="ruleForm.username" placeholder="username"></el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input v-model="ruleForm.password" type="password" placeholder="password"></el-input>
-          </el-form-item>
-          <div class="login-btn">
-            <el-button type="primary" :loading="logining" @click.native.prevent="submitForm">登录</el-button>
-          </div>
-        </el-form>
-      </div>
+        <div class="title">后台管理系统</div>
+        <div class="login">
+            <el-form class="demo-ruleForm" :model="ruleForm" ref="ruleForm" :rules="rules">
+                <el-form-item prop="username">
+                    <el-input v-model="ruleForm.username" placeholder="username"></el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                    <el-input v-model="ruleForm.password" type="password" placeholder="password"></el-input>
+                </el-form-item>
+                <div class="login-btn">
+                    <el-button type="primary" :loading="logining" @click.native.prevent="submitForm">登录</el-button>
+                </div>
+            </el-form>
+        </div>
     </div>
 </template>
 
 <script>
+    import {getLogin} from "../api/login";
     export default {
-      data() {
-        return {
-          logining: false,
-          ruleForm: {
-            username: 'admin',
-            password: '123456'
-          },
-          rules: {
-            username: [
-              { required: true, message: '请输入用户名', trigger: 'blur' }
-            ],
-            password: [
-              { required: true, message: '请输入密码', trigger: 'blur' }
-            ]
-          }
-        }
-      },
-      methods: {
-        submitForm() {
-          this.$refs.ruleForm.validate((valid)=>{
-            if (valid) {
-              sessionStorage.setItem('username', this.ruleForm.username);
-              this.$router.push('/');
-            } else {
-
+        data() {
+            return {
+                logining: false,
+                ruleForm: {
+                    username: 'admin',
+                    password: '123456'
+                },
+                rules: {
+                    username: [
+                      { required: true, message: '请输入用户名', trigger: 'blur' }
+                    ],
+                    password: [
+                      { required: true, message: '请输入密码', trigger: 'blur' }
+                    ]
+                }
             }
-          })
+        },
+        methods: {
+            submitForm() {
+                this._getLogin()
+            },
+            _getLogin() {
+                this.logining = true;
+                getLogin(this.ruleForm).then((res)=>{
+                  this.logining = false;
+                    if (res.data.code === 200) {
+                        sessionStorage.setItem('username', this.ruleForm.username);
+                        this.$router.push('/');
+                    } else {
+                      this.$message.error(res.data.msg);
+                    }
+                })
+            }
         }
-      }
     }
 </script>
 
