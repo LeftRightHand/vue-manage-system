@@ -27,7 +27,7 @@ export default new Router({
               {
                 path: '/markdown',
                 component: resolve => require(['../views/Markdown'], resolve),
-                meta: { title: '文本编辑' }
+                meta: { title: '文章发布' }
               },
               {
                 path: '/editor',

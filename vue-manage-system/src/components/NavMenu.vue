@@ -64,7 +64,7 @@
                 },
                 {
                   index: 'markdown',
-                  title: 'markdown编辑器'
+                  title: '文章发布'
                 }
               ]
             },

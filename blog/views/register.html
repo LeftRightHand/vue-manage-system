@@ -69,10 +69,10 @@
                 var repassword = $("#repassword").val()
                 if (username === '') {
 
-                } else if (password !== repasswrod) {
+                } else if (password !== repassword) {
                     $("#password").css("border","1px solid red");
                     $("#repassword").css("border","1px solid red");
-                } else if (password === repasswrod) {
+                } else if (password === repassword) {
                     $.ajax({
                         url: '/users/register',
                         type: 'post',
