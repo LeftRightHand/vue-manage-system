@@ -2,6 +2,62 @@
 var express = require('express');
 var router = express.Router();
 var Article = require('../models/Article')
+var dateFormat = require('dateformat');
+
+router.post('/list', function (req, res) {
+    var page = Number(req.body.page || 1);
+    var limit = Number(req.body.pageSize || 10);
+    var pages = 0;
+    Article.count().then(function (count) {
+        pages = Math.ceil(count/limit);
+        page = Math.min(page, pages);
+        page = Math.max(page, 1);
+        var skip = (page -1) * limit;
+        Article.find().sort({_id: -1}).limit(limit).skip(skip).populate(['category']).exec(function (err, doc) {
+            if (err) {
+                res.json({
+                    status:"500",
+                    code: 500,
+                    msg:err.message,
+                })
+            } else {
+                res.json({
+                    status:"200",
+                    code: 200,
+                    msg:'',
+                    result: {
+                        list: doc,
+                        count: count,
+                        pages: pages,
+                        pageSize: limit,
+                        page: page
+                    }
+                });
+            }
+        })
+    })
+})
+
+router.post('/delete', function (req, res) {
+    var id = req.body.id || '';
+    Article.remove({
+        _id : id
+    }, function (err, doc) {
+        if (err) {
+            res.json({
+                status:"500",
+                code: 500,
+                msg:err.message,
+            })
+        } else {
+            res.json({
+                status:"200",
+                code: 200,
+                msg:'删除成功',
+            })
+        }
+    })
+})
 
 router.post('/publish', function (req, res) {
     var id = req.body.id || '';
@@ -34,7 +90,7 @@ router.post('/publish', function (req, res) {
     }
 
     new Article({
-        categoryId: id,
+        category: id,
         title: title,
         editType: type,
         content: content

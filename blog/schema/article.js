@@ -1,21 +1,22 @@
 
-var  mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 module.exports = new mongoose.Schema({
 
-    categoryId: {
-        type: mongoose.Schema.Types.ObjectId
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category'
     },
 
     title: String,
     createAt: {
         type: Date,
-        default: new Date()
+        default: Date.now
     },
 
     updateAt: {
         type: Date,
-        default: new Date()
+        default: Date.now
     },
 
     content: {

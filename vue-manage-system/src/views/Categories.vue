@@ -11,7 +11,7 @@
                   style="width: 100%">
               <el-table-column
                   type="index"
-                  width="50"
+                  width="60"
                   label="序号">
               </el-table-column>
               <el-table-column
@@ -38,14 +38,14 @@
         <!-- 编辑弹出框 -->
         <el-dialog title="添加分类" :visible.sync="editVisible" width="50%">
             <el-form>
-              <el-form-item>
-                <el-input v-model="name" placeholder="分类名称"></el-input>
-              </el-form-item>
+                  <el-form-item>
+                      <el-input v-model="name" placeholder="分类名称"></el-input>
+                  </el-form-item>
             </el-form>
-          <span class="dialog-footer">
-                  <el-button @click="editVisible = false">取 消</el-button>
-                  <el-button type="primary" @click="saveEdit">确 定</el-button>
-              </span>
+            <span class="dialog-footer">
+                    <el-button @click="editVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="saveEdit">确 定</el-button>
+            </span>
         </el-dialog>
 
       <!-- 删除提示框 -->

@@ -4,7 +4,6 @@ var router = express.Router();
 var Category = require('../models/Category')
 
 router.get('/list', function (req, res) {
-    console.log(req.query)
     var page = Number(req.query.page || 1);
     var limit = Number(req.query.pageSize || 10);
     var pages = 0;
@@ -121,7 +120,6 @@ router.post('/edit', function (req, res) {
 
 router.post('/delete', function (req, res) {
     var id = req.body.id || '';
-    console.log(id)
     Category.remove({
         _id : id
     }, function (err, doc) {
