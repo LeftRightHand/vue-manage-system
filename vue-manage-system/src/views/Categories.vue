@@ -1,4 +1,5 @@
 <template>
+
     <div class="container">
         <div class="table">
             <div class="handle-box">
@@ -42,9 +43,9 @@
                       <el-input v-model="name" placeholder="分类名称"></el-input>
                   </el-form-item>
             </el-form>
-            <span class="dialog-footer">
-                    <el-button @click="editVisible = false">取 消</el-button>
-                    <el-button type="primary" @click="saveEdit">确 定</el-button>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="editVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveEdit">确 定</el-button>
             </span>
         </el-dialog>
 
@@ -84,7 +85,6 @@
           setTimeout(()=>{
             this._getCategories()
           }, 200)
-          console.log(this.$router)
         },
         methods: {
             handleCurrentChange(val) {
@@ -172,7 +172,6 @@
   .handle-box {
     margin-bottom: 20px;
     align-items: center;
-
   }
   .handle-input {
     width: 300px;

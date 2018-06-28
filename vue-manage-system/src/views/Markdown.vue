@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <el-form>
             <el-form-item>
                 <el-input v-model="from.title" placeholder="标题"></el-input>
@@ -14,15 +14,19 @@
                 </el-option>
               </el-select>
             </el-form-item>
+          <el-form-item>
+          </el-form-item>
             <el-form-item>
                 <mavon-editor v-model="from.content" style="min-height: 600px"></mavon-editor>
             </el-form-item>
+
             <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
         </el-form>
     </div>
 </template>
 
 <script>
+    import bus from '../js/bus'
     import { commitArticle } from "../api/article";
     import { getCategories } from "../api/categories";
     import { mavonEditor } from 'mavon-editor'
@@ -52,6 +56,7 @@
         created() {
             setTimeout(()=>{
                 this._getCategories()
+                this._getArticle()
             }, 100)
         },
         methods: {
@@ -76,6 +81,14 @@
                     } else {
                         this.$message.error(res.data.msg);
                     }
+                })
+            },
+            _getArticle() {
+                bus.$on('article', item => {
+                    console.log(item)
+                    this.from = item
+                    this.from.id = item.category.id
+                    this.value = item.category.name
                 })
             }
         }

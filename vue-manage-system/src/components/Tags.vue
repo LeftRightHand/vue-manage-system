@@ -62,7 +62,7 @@
                     return item.path === route.fullPath;
                 })
                 !isExist && this.tagsList.push({
-                    title: route.meta.title,
+                    title: route.name,
                     path: route.fullPath,
                     name: route.matched[1].components.default.name
                 })

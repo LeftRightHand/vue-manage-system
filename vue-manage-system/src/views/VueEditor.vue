@@ -1,14 +1,15 @@
 <template>
-  <div class="">
+  <div class="container">
       <el-form>
-        <el-form-item>
-          <el-input placeholder="标题"></el-input>
-        </el-form-item>
-        <el-form-item>
-            <quill-editor :options="editorOption"></quill-editor>
-        </el-form-item>
-        <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
+          <el-form-item>
+              <el-input placeholder="标题"></el-input>
+          </el-form-item>
+          <el-form-item>
+              <quill-editor :options="editorOption"></quill-editor>
+          </el-form-item>
+          <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
       </el-form>
+
   </div>
 </template>
 

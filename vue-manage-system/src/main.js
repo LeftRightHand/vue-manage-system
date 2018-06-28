@@ -16,16 +16,16 @@ router.beforeEach((to, from, next)=>{
   const role = sessionStorage.getItem('username');
   if(!role && to.path !== '/login'){
       next('/login');
-  }else if(to.meta.permission){
+  } else if (to.meta.permission){
       next();
-  }else{
+  } else {
       // 简单的判断IE10及以下不进入富文本编辑器，该组件不兼容
-      if(navigator.userAgent.indexOf('MSIE') > -1 && to.path === '/editor'){
+      if (navigator.userAgent.indexOf('MSIE') > -1 && to.path === '/editor') {
           console.log('不兼容')
           Vue.prototype.$alert('vue-quill-editor组件不兼容IE10及以下浏览器，请使用更高版本的浏览器查看', '浏览器不兼容通知', {
             confirmButtonText: '确定'
           });
-      }else{
+      } else {
           next();
       }
   }

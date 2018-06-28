@@ -1,17 +1,18 @@
 <template>
   <div class="wrapper">
-    <nav-head></nav-head>
-    <nav-menu></nav-menu>
-    <div class="content-box" :class="{'content-collapse':collapse}">
-      <tags></tags>
-      <div class="content">
-        <transition name="move" mode="out-in">
-          <keep-alive :include="tagsList">
-            <router-view></router-view>
-          </keep-alive>
-        </transition>
+      <nav-head></nav-head>
+      <nav-menu></nav-menu>
+      <div class="content-box" :class="{'content-collapse':collapse}">
+          <tags></tags>
+          <breadcrumb></breadcrumb>
+          <div class="content">
+              <transition name="move" mode="out-in">
+                  <keep-alive :include="tagsList">
+                    <router-view></router-view>
+                  </keep-alive>
+              </transition>
+          </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -20,8 +21,10 @@
     import NavMenu from "./NavMenu";
     import tags from './Tags'
     import bus from '../js/bus';
+    import Breadcrumb from "./base/Breadcrumb";
     export default {
       components: {
+        Breadcrumb,
         NavMenu,
         NavHead,
         tags
